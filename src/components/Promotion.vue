@@ -1,11 +1,12 @@
 <template>
   <div class="flex flex-col items-center justify-around mt-10 mb-10 " style="font-family: 'Josefin Sans';">
 
-    <div class="flex flex-row items-center justify-center w-full  pb-2 h-72">
+    <div class="flex flex-row flex-wrap items-center justify-between w-full  pb-2 ">
 
       <template v-for="(i, index) in promotions" key="index">
+
         <div @mouseover="divMouseOver(index)" @mouseleave="divMouseLeave(index)"
-          class=" h-full w-full rounded-xl mr-5 flex items-center justify-center relative overflow-hidden">
+          class=" h-80 w-[22%] rounded-xl mr-5 mb-10 flex items-center justify-center relative overflow-hidden ">
           <div v-if="current === index" :class="div_leave_trans ? 'div_translate_enter' : 'div_translate_leave'"
             class="absolute bg-black bg-opacity-70 w-full h-full flex flex-col items-center justify-center">
             <span class="text-white text-3xl mb-5 font-bold">{{ i[0].toUpperCase() + i.slice(1) }}</span>
@@ -30,7 +31,7 @@ import { ref } from 'vue';
 const div_leave_trans = ref(false);
 const btn_trans = ref(false);
 const current = ref(-1);
-const promotions = ref(['notebooks', 'phones', 'tablets', 'watches', 'accessories', 'consoles','accessories', 'consoles'])
+const promotions = ref(['notebooks', 'phones', 'tablets', 'watches', 'accessories', 'consoles','headphones', 'gadgets'])
 
 const divMouseOver = (curr) => {
   current.value = curr; 

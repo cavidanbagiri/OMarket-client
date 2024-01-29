@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col items-center mb-20 p-2" style="font-family: 'Noto Sans' sans-serif;"> 
     <CarouselHome/>
-    <Promotion/>
     <div style="width: 85%;">
+      <Promotion/>
       <Brands/>
       <Popular/>
       <QuickLook/>
