@@ -28,7 +28,10 @@
       <div class="col-span-2 text-center flex flex-row justify-center items-center w-full py-1 h-24">
         <img class=" hover:cursor-pointer  w-7 h-7" src="../assets/favorite.png" alt="">
         <img class=" hover:cursor-pointer  w-7 h-7 mx-10" src="../assets/basket.png" alt="">
-        <img class=" hover:cursor-pointer  w-10 h-10" src="../assets/user_profile.png" alt="">
+        <div @click="userToggle" class="relative">
+          <img class=" hover:cursor-pointer  w-10 h-10" src="../assets/user_profile.png" alt="">
+          <UserToggle :user_toggle="user_toggle" />
+        </div>
       </div>
       
       <Catalog :catalog_toggle="catalog_toggle" :catalog_show="catalog_show" />
@@ -40,8 +43,14 @@
 <script setup>
 import { ref } from 'vue';
 import Catalog from './Catalog.vue';
+import UserToggle from '../components/UserToggle.vue';
 // import HomeStore from '../store/store.home.js'
 //const home_store = HomeStore();
+
+const user_toggle = ref(false);
+const userToggle = () => {
+  user_toggle.value = !user_toggle.value;
+}
 
 const catalog_toggle = ref(false);
 const catalog_show = ref(false);

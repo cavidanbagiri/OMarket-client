@@ -1,14 +1,31 @@
 <template>
+  <!-- <div class="border flex flex-col w-full p-5">
+
+    <transition name="fade">
+
+      <div v-if="showtext" class="">
+        <span>Hello</span>
+      </div>
+
+    </transition> -
+
+    <button @click="showtext = !showtext" class="border p-4 bg-red-400 text-white w-24">
+      show
+    </button>
+  </div>-->
+
   <div class="flex flex-row ">
 
     <!-- Carousel Section -->
     <div class="relative flex flex-row justify-between items-center rounded-xl ">
       <!-- Image Section -->
 
-      <template v-for="(i , index) in images">
-        <img v-if="current==index" 
-        class="w-screen animation_effect" style="height: 50vh;" :src="images[index]" alt="">
-      </template>
+      <template v-for="(i, index) in images">
+        <transition name="fade">
+          <img v-if="current == index" :key="index"
+          class="w-screen " style="height: 50vh;" :src="images[index]" alt="">
+        </transition>
+        </template>
 
       <!-- Left Icon -->
       <div @click="leftSide"
@@ -30,8 +47,12 @@
 </template>
 
 <script setup>
-import { ref, computed, watchEffect } from 'vue';
+import { ref, watchEffect } from 'vue';
 const images = ['./src/assets/carousel1.jpg', './src/assets/carousel2.jpg', './src/assets/carousel3.jpg', './src/assets/carousel4.jpg']
+
+// const showtext = ref(false);
+
+
 
 const current = ref(0);
 
@@ -66,6 +87,47 @@ watchEffect(() => {
 </script>
 
 <style scoped>
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+
+
+/* .fade-enter-from {
+  opacity: 0;
+}
+
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-enter-active {
+  transition: all 2s ease;
+}
+
+
+
+.fade-leave-from {
+  opacity: 1;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-leave-active {
+  transition: all 2s ease;
+} */
+
+
+
 .animation_effect {
   animation: animationeffectright 2s
 }
@@ -81,5 +143,4 @@ watchEffect(() => {
     transform: translateX(0%);
   }
 
-}
-</style>
+}</style>
