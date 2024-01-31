@@ -1,10 +1,8 @@
 <template>
   <div class="flex flex-col items-center mb-20 p-2" style="font-family: 'Noto Sans' sans-serif;"> 
-    <CarouselTemp/>
-    <!-- <br>
-    <CarouselHome/> -->
+    <CarouselHome/> 
     <div style="width: 85%;">
-      <Promotion/>
+      <Promotion1/>
       <Brands/>
       <Popular/>
       <QuickLook/>
@@ -15,9 +13,9 @@
 </template>
 
 <script setup>
+
 import CarouselHome from '../components/CarouselHome.vue';
-import CarouselTemp from '../components/CarouselTemp.vue';
-import Promotion from '../components/Promotion.vue';
+import Promotion1 from '../components/Promotion1.vue';
 import Brands from '../components/Brands.vue';
 import Popular from '../components/Popular.vue';
 import QuickLook from '../components/QuickLook.vue';

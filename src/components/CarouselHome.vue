@@ -5,9 +5,21 @@
     <div class="relative flex flex-row justify-between items-center rounded-xl ">
       <!-- Image Section -->
 
-      <template v-for="(i , index) in images">
+      <!-- <template v-for="(i , index) in images">
         <img v-if="current==index" 
-        class="w-screen animation_effect" style="height: 50vh;" :src="images[index]" alt="">
+        :class="slide_side ? 'animation_effect_left' : 'animation_effect_right' "
+        class="w-screen " style="height: 50vh;" :src="images[index]" alt="">
+        <img v-if="current<index" 
+        :class="slide_side ? 'animation_effect_left' : 'animation_effect_right' "
+        class="w-screen " style="height: 50vh;" :src="images[index]" alt="">
+      </template> -->
+
+      <template v-for="(i , index) in images">
+      
+        <img v-if="current==index" 
+        :class="slide_side ? 'animation_effect_left' : 'animation_effect_right' "
+        class="w-screen " style="height: 50vh;" :src="images[index]" alt="">
+
       </template>
 
       <!-- Left Icon -->
@@ -30,10 +42,11 @@
 </template>
 
 <script setup>
-import { ref, computed, watchEffect } from 'vue';
+import { ref, watchEffect } from 'vue';
 const images = ['./src/assets/carousel1.jpg', './src/assets/carousel2.jpg', './src/assets/carousel3.jpg', './src/assets/carousel4.jpg']
 
 const current = ref(0);
+const slide_side = ref(false);
 
 const leftSide = () => {
   if (current.value === 0) {
@@ -41,6 +54,7 @@ const leftSide = () => {
   } else {
     current.value -= 1;
   }
+  slide_side.value = true;
 }
 
 const rightSide = () => {
@@ -50,6 +64,7 @@ const rightSide = () => {
   else {
     current.value = 0;
   }
+  slide_side.value = false;
 }
 
 watchEffect(() => {
@@ -66,14 +81,31 @@ watchEffect(() => {
 </script>
 
 <style scoped>
-.animation_effect {
-  animation: animationeffectright 2s
+.animation_effect_right {
+  animation: animationeffectright 1s
 }
 
 @keyframes animationeffectright {
 
   from {
     transform: translateX(100%);
+  }
+
+  to {
+
+    transform: translateX(0%);
+  }
+
+}
+
+.animation_effect_left {
+  animation: animationeffectleft 1s
+}
+
+@keyframes animationeffectleft {
+
+  from {
+    transform: translateX(-100%);
   }
 
   to {
