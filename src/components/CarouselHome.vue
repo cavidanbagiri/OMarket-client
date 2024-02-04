@@ -82,7 +82,7 @@ watchEffect(() => {
 
 <style scoped>
 .animation_effect_right {
-  animation: animationeffectright 1s
+  animation: animationeffectright 0.3s
 }
 
 @keyframes animationeffectright {
@@ -99,7 +99,7 @@ watchEffect(() => {
 }
 
 .animation_effect_left {
-  animation: animationeffectleft 1s
+  animation: animationeffectleft 0.3s
 }
 
 @keyframes animationeffectleft {

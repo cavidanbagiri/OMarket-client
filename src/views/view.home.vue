@@ -1,8 +1,13 @@
 <template>
   <div class="flex flex-col items-center mb-20 p-2" style="font-family: 'Noto Sans' sans-serif;"> 
+   
+    <Teleport to="body">
+      <UserLoginRegisterTeleport/>
+    </Teleport>
+
     <CarouselHome/> 
+    <Promotion1/>
     <div style="width: 85%;">
-      <Promotion1/>
       <Brands/>
       <Popular/>
       <QuickLook/>
@@ -21,6 +26,12 @@ import Popular from '../components/Popular.vue';
 import QuickLook from '../components/QuickLook.vue';
 import SpecialForYou from '../components/SpecialForYou.vue';
 import LastNews from '../components/LastNews.vue';
+
+
+import UserStore from '../store/store.user';
+import UserLoginRegisterTeleport from '../components/UserLoginRegisterTeleport.vue';
+const user_store = UserStore();
+
 
 </script>
 

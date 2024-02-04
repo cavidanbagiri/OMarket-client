@@ -7,14 +7,14 @@
     <!-- Cards -->
     <div class="flex flex-row flex-wrap w-full my-5 justify-between">
         <template v-for="i in 4">
-          <HomeCards/>
+          <Cards/>
         </template>
     </div>
   </div>
 </template>
 
 <script setup>
-  import HomeCards from './HomeCards.vue'
+  import Cards from './Cards.vue'
 </script>
 
 <style lang="scss" scoped>

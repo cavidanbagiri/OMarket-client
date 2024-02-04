@@ -7,8 +7,8 @@
         <img class="w-12 h-12" src="../assets/user_profile.png" alt="">
       </div>
       <div class="ml-4 flex flex-col items-start justify-start">
-        <span class="text-xl font-bold" >Cavidan Bagirli</span>
-        <span class="text-lg text-gray-500" >cavidanbagiri@gmail.com</span>
+        <span class="text-xl font-bold" >{{ user_store.user?.name }} {{ user_store.user?.surname }}</span>
+        <span class="text-lg text-gray-500" >{{ user_store.user?.email }}</span>
       </div>
     </div>
 
@@ -55,9 +55,15 @@
     </div>
 
      <!-- Box -->
-     <div class="flex flex-row items-center mt-2 hover:bg-gray-100 py-3 px-3 rounded-lg hover:cursor-pointer">
+     <div @click="userLogout" v-if="user_store.GETUSER" class="flex flex-row items-center mt-2 hover:bg-gray-100 py-3 px-3 rounded-lg hover:cursor-pointer">
       <img class="w-7 h-7" src="../assets/logout.png" alt="">
       <span class="text-xl font-bold ml-4">Logout</span>
+    </div>
+
+    <!-- Box -->
+    <div @click="userLogin"  v-else class="flex flex-row items-center mt-2 hover:bg-gray-100 py-3 px-3 rounded-lg hover:cursor-pointer">
+      <img class="w-7 h-7" src="../assets/logout.png" alt="">
+      <span class="text-xl font-bold ml-4">Login</span>
     </div>
 
   </div>
@@ -65,7 +71,20 @@
 
 <script setup>
 
+import UserStore from '../store/store.user';
+
+const user_store = UserStore();
+
 const props = defineProps(['user_toggle'])
+
+const userLogin = () => {
+  user_store.user_teleport = true;
+}
+
+const userLogout = () => {
+  user_store.logoutUser();
+}
+
 
 </script>
 

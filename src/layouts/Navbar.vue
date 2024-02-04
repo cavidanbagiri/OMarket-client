@@ -6,7 +6,7 @@
       <div class="col-span-3 text-center flex items-center justify-around  h-24 " style="font-family: 'Josefin Sans';">
         <div class="text-black text-[40px] font-bold">
           <span class="">
-            Market</span>
+            OMarket</span>
         </div>
         <div style="font-family: 'Inter';">
           <button @click="catalogToggle" class="border py-3 px-8 flex items-center rounded-lg bg-black border-none hover:bg-slate-800">
@@ -26,14 +26,25 @@
   
       <!-- User Information Section -->
       <div class="col-span-2 text-center flex flex-row justify-center items-center w-full py-1 h-24">
-        <img class=" hover:cursor-pointer  w-7 h-7" src="../assets/favorite.png" alt="">
-        <img class=" hover:cursor-pointer  w-7 h-7 mx-10" src="../assets/basket.png" alt="">
+        <div class="relative">
+          <img class="hover:bg-gray-200 duration-300 p-2 rounded-full hover:cursor-pointer w-11 h-11" src="../assets/favorite.png" alt="">
+          <span class="absolute -top-1 -right-1 bg-indigo-700 w-5 h-5 flex items-center justify-center text-white rounded-full text-sm font-bold p-2">
+            1
+          </span>
+        </div>
+        <div class="relative mx-10">
+          <img class="hover:bg-gray-200 duration-300 p-2 rounded-full hover:cursor-pointer w-11 h-11 " src="../assets/basket.png" alt="">
+          <span class="absolute -top-1 -right-1 bg-indigo-700 w-5 h-5 flex items-center justify-center text-white rounded-full text-sm font-bold p-2">
+            1
+          </span>
+        </div>
         <div @click="userToggle" class="relative">
           <img class=" hover:cursor-pointer  w-10 h-10" src="../assets/user_profile.png" alt="">
           <UserToggle :user_toggle="user_toggle" />
         </div>
       </div>
       
+
       <Catalog :catalog_toggle="catalog_toggle" :catalog_show="catalog_show" />
 
     </div>
@@ -44,8 +55,8 @@
 import { ref } from 'vue';
 import Catalog from './Catalog.vue';
 import UserToggle from '../components/UserToggle.vue';
-// import HomeStore from '../store/store.home.js'
-//const home_store = HomeStore();
+import UserLoginRegisterTeleportVue from '../components/UserLoginRegisterTeleport.vue';
+
 
 const user_toggle = ref(false);
 const userToggle = () => {

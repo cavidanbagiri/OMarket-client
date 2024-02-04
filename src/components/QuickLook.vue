@@ -16,32 +16,24 @@
     <!-- Tabs -->
     <div class="flex flex-row pl-5">
       <!-- <template v-for="i in 7"> -->
-        <div class="bg-gray-100 py-3 px-4 m-3 rounded-lg hover:cursor-pointer hover:bg-gray-200 duration-200">
-          <span>IPhone</span>
+        <div class=" py-3 px-4 m-3 rounded-lg hover:cursor-pointer duration-200" v-for="(i, index) in tabs" 
+        :class=" index==current ? 'bg-black text-white hover:bg-gray-700  font-bold' : 'bg-gray-100 hover:bg-gray-200 ' " @click="clickedTabs(index)">
+          <span>{{ i }}</span>
         </div>
-        <div class="bg-gray-100 py-3 px-4 m-3 rounded-lg hover:cursor-pointer hover:bg-gray-200 duration-200">
-          <span>Macbook</span>
-        </div>
-        <div class="bg-gray-100 py-3 px-4 m-3 rounded-lg hover:cursor-pointer hover:bg-gray-200 duration-200">
-          <span>Accessories</span>
-        </div>
-        <div class="bg-gray-100 py-3 px-4 m-3 rounded-lg hover:cursor-pointer hover:bg-gray-200 duration-200">
-          <span>Game Console</span>
-        </div>
-        <div class="bg-gray-100 py-3 px-4 m-3 rounded-lg hover:cursor-pointer hover:bg-gray-200 duration-200">
-          <span>Watch</span>
-        </div>
-        <div class="bg-gray-100 py-3 px-4 m-3 rounded-lg hover:cursor-pointer hover:bg-gray-200 duration-200">
-          <span>Audio</span>
-        </div>
-      <!-- </template> -->
+    
     </div>
 
     <!-- Cards -->
     <div class="flex flex-wrap justify-between">
       <template v-for="i in 8">
         
-          <Cards/>
+          <Cards>
+            <template v-slot:instock>  
+              <div class="text-sm text-green-500 text-start my-5 font-bold">
+                <span> &#9679; In Stock</span>
+              </div>
+            </template>
+          </Cards>
         
       </template>
     </div>
@@ -51,7 +43,23 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import Cards from './Cards.vue';
+
+const current = ref(false);
+const tabs = [
+  'Phones',
+  'Notebooks',
+  'Accessroies',
+  'Game Consoles',
+  'Watches',
+  'Audios'
+]
+
+const clickedTabs = (index) => {
+  current.value = index;
+}
+
 </script>
 
 <style lang="scss" scoped>

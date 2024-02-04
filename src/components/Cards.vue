@@ -1,13 +1,14 @@
 <template>
-  <div class="flex flex-col justify-between  pt-2 pb-5 px-5 rounded-lg m-3 hover:shadow-xl hover:cursor-pointer duration-200" style="width:20%;font-family: 'Poppins';">
+  <div class="flex flex-col justify-between  pt-2 pb-5 px-5 rounded-lg m-3 hover:shadow-2xl hover:cursor-pointer duration-200" style="width:20%;font-family: 'Poppins';">
     <!-- Image -->
     <div>
       <img src="../assets/promotions/notebooks.jpg" style="height: 25vh;" alt="">
     </div>
     <!-- Stock -->
-    <div class="text-sm text-green-500 text-start my-5 font-bold">
-      <span> &#9679; In Stock</span>
-    </div>
+    
+    <slot name="instock">
+    </slot>
+
     <!-- Material Name -->
     <div class="text-md text-start my-2">
       <span>Apple MacBook Pro 14" (M3 8C CPU, 10C GPU, 2023) 8 ГБ, 512 ГБ SSD, «серый космос»</span>

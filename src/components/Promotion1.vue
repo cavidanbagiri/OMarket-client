@@ -1,22 +1,25 @@
 <template>
   <div class="flex flex-col  my-10 p-1" style="font-family: 'Josefin Sans';">
 
-    <div class="flex flex-row flex-wrap items-center justify-between  pb-2 ">
+    <div class="flex flex-row flex-wrap items-center justify-between  pb-2 w-screen" style="font-family: 'Jost';">
 
-      <template v-for="(i, index) in promotions" key="index">
+      <template v-for="(i, index) in promotions" key="index" class="">
 
           <div @mouseover="divMouseOver(index)" @mouseleave="divMouseLeave(index)"
-            class="h-80 w-[22%] rounded-xl m-5 mb-10 flex items-center justify-center relative overflow-hidden ">
+            class="h-80 w-[25%] hover:rounded-xl mb-10 flex flex-col items-center justify-center relative overflow-hidden border ">
             <transition name="fade" >
               <div v-if="current === index"
-                class="absolute top-0 left-0 bg-black bg-opacity-70 w-full h-full flex flex-col items-center justify-center">
+                class="absolute top-0 left-0 bg-black bg-opacity-20  w-full h-full flex flex-col items-center justify-center">
                 <span class="text-white text-3xl mb-5 font-bold">{{ i[0].toUpperCase() + i.slice(1) }}</span>
                 <button @mouseover="btnMouseOver" @mouseleave="btnMouseLeave" :class="btn_trans ? 'btn_translate' : ''"
                   class="text-white  border-2 py-2 px-6 rounded-2xl font-bold text-lg">
                   Look</button>
               </div>
             </transition>
-            <img :src="'./src/assets/promotions/' + i + '.jpg'" class="h-full w-full rounded-xl" alt="">
+            <img :src="'./src/assets/promotions/' + i + '.jpg'" class="h-32 w-36 rounded-xl" alt="">
+            <div class="text-2xl mt-5">
+              <span>{{ i[0].toUpperCase() + i.slice(1) }}</span>
+            </div>
             <div>
               
             </div>
