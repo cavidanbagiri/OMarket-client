@@ -28,7 +28,7 @@ const user_store = UserStore();
 
 
 
-const current_tab = ref(3);
+const current_tab = ref(2);
 const tabs = [
 AdminPageDashboard,
 AdminPageProductList,

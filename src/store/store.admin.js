@@ -22,7 +22,9 @@ const AdminStore = defineStore('AdminStore',{
     async getCategoriesAndVariants () {
       await API.get('/admin/categoriesvariants')
       .then((respond)=>{
-        console.log('respond is ', respond.data);
+        this.categories = respond.data.categories;
+        this.variants = respond.data.variants;
+        console.log('respond is ', this.categories, ' : ',this.variants);
       })
       .catch((err)=>{
         console.log('Fetch Categories Error : ', err);

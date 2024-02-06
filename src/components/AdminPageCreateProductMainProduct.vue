@@ -8,12 +8,12 @@
     <div v-if="category_toggle" class="bg-slate-300 w-80 m-1  absolute top-10 p-2">
       <input class="w-full p-2 " type="text" placeholder="Seach Category">
       <ul>
-        <li v-for="i in categories" @click="selectedCategories(i)"
-          class="mx-1 hover:bg-gray-100 p-1 hover:cursor-pointer">{{ i }}</li>
+        <li v-for="i in admin_store.categories" @click="selectedCategories(i.id, i.category_name)"
+          class="mx-1 hover:bg-gray-100 p-1 hover:cursor-pointer">{{ i.category_name }}</li>
       </ul>
     </div>
     <!-- Product Common Inform Side -->
-    <input class="p-2 m-1 w-80 bg-gray-100" v-model="product_inform.category" type="text" disabled>
+    <input class="p-2 m-1 w-80 bg-gray-100" v-model="product_inform.category_name" type="text" disabled>
     <input class="p-2 m-1 w-80 bg-gray-100" v-model="product_inform.product_name" type="text" placeholder="Product Name">
     <input class="p-2 m-1 w-80 bg-gray-100" v-model="product_inform.description" type="text" placeholder="Description">
 
@@ -48,15 +48,21 @@
 
 import { ref, reactive } from 'vue';
 
+import AdminStore from '@/store/store.admin';
+
+const admin_store = AdminStore();
+
 const props = defineProps(['variants']);
 
 const category_toggle = ref(false);
-const selectedCategories = (selected) => {
-  product_inform.category = selected;
+const selectedCategories = (id, name) => {
+  product_inform.category_id = id;
+  product_inform.category_name = name;
 }
 
 const product_inform = reactive({
-  category:'',
+  category_id: 0,
+  category_name: '',
   product_name:'',
   description:'',
   price: 0,
