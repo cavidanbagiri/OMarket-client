@@ -5,8 +5,11 @@
       
       <div class="col-span-3 text-center flex items-center justify-around  h-24 " style="font-family: 'Josefin Sans';">
         <div class="text-black text-[40px] font-bold">
-          <span class="">
-            OMarket</span>
+          <router-link to="/" >
+            <span class="">
+              OMarket
+            </span>
+          </router-link>
         </div>
         <div style="font-family: 'Inter';">
           <button @click="catalogToggle" class="border py-3 px-8 flex items-center rounded-lg bg-black border-none hover:bg-slate-800">

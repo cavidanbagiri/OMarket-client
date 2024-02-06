@@ -37,7 +37,6 @@ const UserStore = defineStore('UserStore', {
       await API.post('/user/login', user_data)
       .then((respond)=>{
         this.user = respond.data.user
-        console.log('this user is : ', this.user);
         localStorage.setItem('token', respond.data.access);
         localStorage.setItem('user', JSON.stringify( respond.data.user));
         this.auth = true
@@ -70,7 +69,7 @@ const UserStore = defineStore('UserStore', {
 
 
     async fuserFunc(user_data){
-      const token = localStorage.getItem('token');
+      // const token = localStorage.getItem('token');
       await API.get('/user/users')
       .then((respond)=>{
         console.log('respond data : ', respond.data);

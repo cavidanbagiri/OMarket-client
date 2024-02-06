@@ -19,13 +19,13 @@
 
 <script setup>
 
-import CarouselHome from '../components/CarouselHome.vue';
-import Promotion1 from '../components/Promotion1.vue';
-import Brands from '../components/Brands.vue';
-import Popular from '../components/Popular.vue';
-import QuickLook from '../components/QuickLook.vue';
-import SpecialForYou from '../components/SpecialForYou.vue';
-import LastNews from '../components/LastNews.vue';
+import CarouselHome from '@/components/CarouselHome.vue';
+import Promotion1 from '@/components/Promotion1.vue';
+import Brands from '@/components/Brands.vue';
+import Popular from '@/components/Popular.vue';
+import QuickLook from '@/components/QuickLook.vue';
+import SpecialForYou from '@/components/SpecialForYou.vue';
+import LastNews from '@/components/LastNews.vue';
 
 
 import UserStore from '../store/store.user';
