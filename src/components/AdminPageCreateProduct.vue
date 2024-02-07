@@ -19,11 +19,11 @@
       <div class="flex flex-col">
 
         <!-- Add Or Remove BTN -->
-        <div class="">
-          <button @click="addVariants" class="p-2 bg-green-500 text-white font-bold m-2">
+        <div class=" px-2 flex justify-between py-1">
+          <button @click="addVariants" class="p-2 bg-green-500 text-white font-bold  hover:cursor-pointer hover:bg-green-400 ">
             Add Variants
           </button>
-          <button @click="removeVariants" class="p-2 bg-red-500 text-white font-bold">
+          <button @click="removeVariants" class="p-2 bg-red-500 text-white font-bold hover:cursor-pointer hover:bg-red-400 ">
             Remove Variants
           </button>
         </div>
@@ -45,9 +45,9 @@
 
 import { ref } from 'vue';
 
-import AdminPageCreateProductMainProduct from './AdminPageCreateProductMainProduct.vue';
+import AdminPageCreateProductMainProduct from '@/components/AdminPageCreateProductMainProduct.vue';
 
-import AdminPageCreateProductMainProductEachVariant from './AdminPageCreateProductMainProductEachVariant.vue'
+import AdminPageCreateProductMainProductEachVariant from '@/components/AdminPageCreateProductMainProductEachVariant.vue'
 
 const product_variant_count = ref(1);
 

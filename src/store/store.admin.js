@@ -7,7 +7,8 @@ const AdminStore = defineStore('AdminStore',{
   state:()=>({
 
     categories: [],
-    variants: []
+    variants: [],
+    creating_product: false
 
   }),
 
@@ -29,6 +30,19 @@ const AdminStore = defineStore('AdminStore',{
       .catch((err)=>{
         console.log('Fetch Categories Error : ', err);
       })
+    },
+
+    async createProduct(data) {
+
+      await API.post('/admin/createproduct', data)
+      .then((respond)=>{
+        console.log('create product respond : ', respond.data);
+        this.creating_product = respond.data
+      })
+      .catch((err)=>{
+        console.log('Create product Error : ', err);
+      })
+
     },
 
     // Create Category
