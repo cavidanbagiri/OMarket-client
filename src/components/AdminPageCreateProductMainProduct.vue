@@ -15,29 +15,42 @@
     <!-- Product Common Inform Side -->
     <span class="p-1 m-1 text-sm">
       Selected Category : 
-
       <span class=" w-80 underline text-sm" type="text" >{{ product_inform.category_name }}</span>
     </span>
-    <input class="p-2 m-1 w-80 bg-gray-100" v-model="product_inform.product_name" type="text" placeholder="Product Name">
-    <input class="p-2 m-1 w-80 bg-gray-100" v-model="product_inform.description" type="text" placeholder="Description">
+    <div class="flex flex-col">
+      <span class="py-2 m-1">Product Name</span>
+      <input class="p-2 m-1 w-80 bg-gray-100 text-sm" v-model="product_inform.product_name" type="text" placeholder="Product Name">
+    </div>
+    <div class="flex flex-col">
+      <span class="py-2 m-1">Description</span>
+      <input class="p-2 m-1 w-80 bg-gray-100 text-sm" v-model="product_inform.description" type="text" placeholder="Description">
+    </div>
 
     <!-- Price -->
     <div class="flex flex-col">
       <span class="py-2 m-1">Price</span>
-      <input class="m-1 p-2 bg-gray-100" type="number" v-model="product_inform.price">
+      <input class="m-1 p-2 bg-gray-100 text-sm" type="number" v-model="product_inform.price">
     </div>
 
     <!-- Stock -->
     <div class="flex flex-col">
       <span class="py-2 m-1">Stock</span>
-      <input class="m-1 p-2 bg-gray-100" type="number" v-model="product_inform.stock">
+      <input class="m-1 p-2 bg-gray-100 text-sm" type="number" v-model="product_inform.stock">
     </div>
 
     <!-- Sku -->
     <div class="flex flex-col">
       <span class="py-2 m-1">Sku</span>
-      <input class="m-1 p-2 bg-gray-100" type="text" v-model="product_inform.sku">
+      <input class="m-1 p-2 bg-gray-100 text-sm" type="text" v-model="product_inform.sku">
     </div>
+
+   <!-- Add Image -->
+   <div class="flex flex-col">
+        <span class="py-2 m-1">Add Image</span>
+        <input class="m-1 p-2 bg-gray-100 text-sm" type="file" name="image" accept="image/png, image/jpg, image/jpeg"
+            @change="onFileChange">
+    </div>
+
 
     <div class="p-1">
       <button @click="addDatabase" class="py-2 px-4 bg-green-500 text-white hover:bg-green-300 hover:cursor-pointer duration-200">
@@ -62,7 +75,6 @@ const category_toggle = ref(false);
 const selectedCategories = (id, name) => {
   product_inform.category_id = id;
   product_inform.category_name = name;
-  console.log(' -> ',product_inform);
   category_toggle.value = false
 }
 
@@ -76,15 +88,30 @@ const product_inform = reactive({
   sku: '',
 })
 
+// Selected Image 
+let selected_file = '';
+const onFileChange = (e) =>{
+    const temp = e.target.files[0];
+    selected_file = temp;
+}
+
 
 const addDatabase = () => {
-
-  const data = {
-    product_data : product_inform,
-    product_variants : props.variants
+  const name = {
+    name:'cavidan',
+    age:31
   }
+  const formData = new FormData();
+  formData.append('product_data', JSON.stringify(product_inform));
+  formData.append('product_variants', JSON.stringify(props.variants));
+  formData.append('file', selected_file);
 
-  admin_store.createProduct(data);
+  // const data = {
+  //   product_data : product_inform,
+  //   product_variants : props.variants
+  // }
+
+  admin_store.createProduct(formData);
 }
 
 </script>

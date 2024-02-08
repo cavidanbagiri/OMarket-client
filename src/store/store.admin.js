@@ -33,7 +33,7 @@ const AdminStore = defineStore('AdminStore',{
     },
 
     async createProduct(data) {
-
+      console.log('data -> ',data)
       await API.post('/admin/createproduct', data)
       .then((respond)=>{
         console.log('create product respond : ', respond.data);
