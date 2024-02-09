@@ -34,7 +34,7 @@
 
 <script setup>
 
-import { ref, reactive, onMounted } from 'vue';
+import { ref, reactive, onMounted, onUnmounted } from 'vue';
 
 import AdminStore from '@/store/store.admin'; 
 const admin_store = AdminStore();
@@ -49,6 +49,12 @@ const each_product_variants = reactive({
 
 onMounted(()=>{
   props.variants.push(each_product_variants);
+  console.log('mounted works');
+})
+
+onUnmounted(()=>{
+  props.variants.pop();
+  console.log('Unmounted works');
 })
 
 const variants_toggle = ref(false);
@@ -61,20 +67,6 @@ const selectedVariant = (id, variant_name) => {
   variants_toggle.value = false;
 }
 
-
-// const variants = [
-//   'Marka',
-//   'Model',
-//   'Display',
-//   'Ram',
-//   'Disk Type',
-//   'Display Type',
-//   'CPU',
-//   'GPU',
-//   'Color',
-//   'Sim Card Size',
-
-// ]
 
 </script>
 

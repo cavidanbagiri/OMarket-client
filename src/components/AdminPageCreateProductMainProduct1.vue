@@ -1,6 +1,11 @@
 <template>
   <!-- Product Side -->
   <div class="flex flex-col green-500 relative border h-full">
+
+    <Veeform @submit="addDatabase" :validation-schema="productSchema">
+
+    </Veeform>
+
     <!-- Category Side -->
     <button @click="category_toggle = !category_toggle" class="bg-gray-100 w-24 py-2 m-1">
       Category
@@ -12,46 +17,45 @@
           class=" hover:bg-gray-100 p-1  hover:cursor-pointer">{{ i.category_name }}</li>
       </ul>
     </div>
+    
     <!-- Product Common Inform Side -->
-    <span class="p-1 m-1 text-sm" :class=" product_inform.category_name == '' ? 'text-red-500' : '' ">
+    <span class="p-1 m-1 text-sm">
       Selected Category : 
-      <span class=" w-80 underline text-sm" 
-      type="text" >{{ product_inform.category_name }}</span>
+      <span class=" w-80 underline text-sm" type="text" >{{ product_inform.category_name }}</span>
     </span>
+
     <div class="flex flex-col">
       <span class="py-2 m-1">Product Name</span>
-      <span v-if="err_message && product_inform.product_name == '' " class=" mx-1 text-xs text-red-500">Must Be Fill</span>
-      <input class="p-2 m-1 w-80 bg-gray-100 text-sm outline-none" v-model="product_inform.product_name" type="text" placeholder="Product Name">
+      <input class="p-2 m-1 w-80 bg-gray-100 text-sm" v-model="product_inform.product_name" type="text" placeholder="Product Name">
     </div>
+
     <div class="flex flex-col">
       <span class="py-2 m-1">Description</span>
-      <span v-if="err_message && product_inform.description == '' " class=" mx-1 text-xs text-red-500">Must Be Fill</span>
-      <input class="p-2 m-1 w-80 bg-gray-100 text-sm outline-none" v-model="product_inform.description" type="text" placeholder="Description">
+      <input class="p-2 m-1 w-80 bg-gray-100 text-sm" v-model="product_inform.description" type="text" placeholder="Description">
     </div>
 
     <!-- Price -->
     <div class="flex flex-col">
       <span class="py-2 m-1">Price</span>
-      <span v-if="err_message && product_inform.price <= 0 " class=" mx-1 text-xs text-red-500">Must Be Fill</span>
-      <input class="m-1 p-2 bg-gray-100 text-sm outline-none" type="number" v-model="product_inform.price">
+      <input class="m-1 p-2 bg-gray-100 text-sm" type="number" v-model="product_inform.price">
     </div>
 
     <!-- Stock -->
     <div class="flex flex-col">
       <span class="py-2 m-1">Stock</span>
-      <input class="m-1 p-2 bg-gray-100 text-sm outline-none" type="number" v-model="product_inform.stock">
+      <input class="m-1 p-2 bg-gray-100 text-sm" type="number" v-model="product_inform.stock">
     </div>
 
     <!-- Sku -->
     <div class="flex flex-col">
       <span class="py-2 m-1">Sku</span>
-      <input class="m-1 p-2 bg-gray-100 text-sm outline-none" type="text" v-model="product_inform.sku">
+      <input class="m-1 p-2 bg-gray-100 text-sm" type="text" v-model="product_inform.sku">
     </div>
 
    <!-- Add Image -->
    <div class="flex flex-col">
         <span class="py-2 m-1">Add Image</span>
-        <input class="m-1 p-2 bg-gray-100 text-sm outline-none" type="file" name="image" accept="image/png, image/jpg, image/jpeg"
+        <input class="m-1 p-2 bg-gray-100 text-sm" type="file" name="image" accept="image/png, image/jpg, image/jpeg"
             @change="onFileChange">
     </div>
 
@@ -82,7 +86,6 @@ const selectedCategories = (id, name) => {
   category_toggle.value = false
 }
 
-const err_message = ref(false);
 const product_inform = reactive({
   category_id: 0,
   category_name: '',
@@ -101,19 +104,12 @@ const onFileChange = (e) =>{
 }
 
 
-const addDatabase = () => {
+const addDatabase = (values) => {
 
-  console.log('variants : ', props.variants);
+  console.log('values :: ', values);
 
-  if(product_inform.product_name === '' ){
-    err_message.value = true;
-  }
-  if(product_inform.description === '' ){
-    err_message.value = true;
-  }
-  if(product_inform.price > 0 ){
-    err_message.value = true;
-  }
+  console.log('product inform : ', product_inform);
+  console.log('product variants : ', props.variants);
 
   // Add Values In Formadata
   const formData = new FormData();
@@ -124,6 +120,10 @@ const addDatabase = () => {
   // Send To backend
   admin_store.createProduct(formData);
 
+}
+
+const productSchema = {
+  
 }
 
 </script>

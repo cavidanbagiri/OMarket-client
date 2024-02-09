@@ -24,7 +24,6 @@
       <!-- Login -->
       <VeeForm v-if="current" @submit="loginUser" >
 
-
           <VeeField name="email" :rules="{required: true, email:true}"
           class="w-full my-3 rounded-lg bg-gray-100  p-2" type="text" placeholder="Email"
             v-model="user_data.email" />
@@ -69,7 +68,7 @@
         <button @click="checkAuth" class="bg-black mt-3 text-white w-full p-3 rounded-lg">
           Refresh
         </button> -->
-
+        <span v-if="user_error.cond" class="text-end py-2 text-sm text-red-500 font-bold">{{ user_error.user_not_found_error }}</span>
     </div>
   </div>
 </template>
@@ -85,10 +84,24 @@ const user_data = reactive({
   password: ''
 })
 
+// For Selecting Login OR Register component
 const current = ref(true);
 
-const loginUser = (values) => {
-  user_store.loginUser(values);
+// User Not Found Error Message
+const user_error = reactive({
+   user_not_found_error : 'User Not Found',
+   cond: false
+})
+
+const loginUser = async (values) => {
+  await user_store.loginUser(values)
+  .then((respond)=>{
+    user_store.user_teleport = false;
+  }).catch((err)=>{
+    if(err?.response?.data){
+      user_error.cond = true;
+    }
+  })
 }
 
 const registerUser = (values) => {

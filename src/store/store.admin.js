@@ -34,14 +34,15 @@ const AdminStore = defineStore('AdminStore',{
 
     async createProduct(data) {
       console.log('data -> ',data)
-      await API.post('/admin/createproduct', data)
-      .then((respond)=>{
-        console.log('create product respond : ', respond.data);
-        this.creating_product = respond.data
-      })
-      .catch((err)=>{
-        console.log('Create product Error : ', err);
-      })
+      return 'OK';
+      // await API.post('/admin/createproduct', data)
+      // .then((respond)=>{
+      //   console.log('create product respond : ', respond.data);
+      //   this.creating_product = respond.data
+      // })
+      // .catch((err)=>{
+      //   console.log('Create product Error : ', err);
+      // })
 
     },
 

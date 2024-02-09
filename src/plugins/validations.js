@@ -1,6 +1,6 @@
 
 import { defineRule, Form as VeeForm, Field as VeeField, ErrorMessage } from 'vee-validate';
-import { required, email, min } from '@vee-validate/rules';
+import { required, email, min, alpha, numeric  } from '@vee-validate/rules';
 
 const validation = {
 
@@ -13,8 +13,8 @@ const validation = {
     defineRule('required', required);
     defineRule('email', email);
     defineRule('min', min);
-
-
+    //defineRule('alpha', alpha);
+    //defineRule('numeric', numeric);
 
   }
 

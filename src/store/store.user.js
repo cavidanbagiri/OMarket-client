@@ -40,8 +40,6 @@ const UserStore = defineStore('UserStore', {
         localStorage.setItem('token', respond.data.access);
         localStorage.setItem('user', JSON.stringify( respond.data.user));
         this.auth = true
-      }).catch((err)=>{
-        console.log('User Error : ', err);
       })
     },
 
