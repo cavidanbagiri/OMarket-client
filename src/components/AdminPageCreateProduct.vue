@@ -9,17 +9,17 @@
       </span>
     </div>
 
-    <div class="flex flex-row">
+    <div class="flex flex-row px-1">
 
       <!-- Product Side -->
       <AdminPageCreateProductMainProduct :variants="variants" />
 
 
       <!-- Variants Side -->
-      <div class="flex flex-col">
-        <span v-if="error_message.cond" class="text-red-500 text-sm px-2">{{error_message.msg}}</span>
+      <div class="flex flex-col w-full px-1">
+        <span v-if="error_message.cond" class=" text-sm px-2">{{error_message.msg}}</span>
         <!-- Add Or Remove BTN -->
-        <div class=" px-2 flex justify-between py-1">
+        <div class=" flex justify-between py-1">
           <button @click="addVariants" class="p-2 bg-green-500 text-white font-bold  hover:cursor-pointer hover:bg-green-400 ">
             Add Variants
           </button>
@@ -34,9 +34,7 @@
 
       </div>
 
-
     </div>
-
 
   </div>
 </template>

@@ -6,8 +6,14 @@ const AdminStore = defineStore('AdminStore',{
 
   state:()=>({
 
+    // Fetch Products
+    products: [],
+    product_headers: [],
+    // Fetch Categories
     categories: [],
+    // Fetch Variants
     variants: [],
+    // After Creating New Product
     creating_product: false
 
   }),
@@ -15,9 +21,36 @@ const AdminStore = defineStore('AdminStore',{
   getters:{
     GETCATEGORIES: (state) => state.categories,
     GETVARIANTS: (state) => state.variants,
+    GETPRODUCTS: (state) => state.products
   },
 
   actions:{
+
+    // Fetch All Products 
+    async fetchProducts(){
+      await API.get('/admin/products')
+      .then((respond)=>{
+        this.products = respond.data
+        this.product_headers = [];
+        if(this.products.length){
+          for(let [key, value] of Object.entries(this.products[0]) ){
+            if(key !== "CategoryModel" ){
+              this.product_headers.push(key);
+            }
+            else{
+              console.log('key is : ', this.products[0][key]);
+              for(let [catkey, catvalue] of Object.entries(this.products[0][key]) ){
+                this.product_headers.push(catkey);
+              }
+            }
+          }
+        }
+        console.log('heades : ', this.product_headers);
+      })
+      .catch((err)=>{
+        console.log('Fetch Categories Error : ', err);
+      })
+    } ,
 
     // Get Categories and Variants
     async getCategoriesAndVariants () {
@@ -25,7 +58,6 @@ const AdminStore = defineStore('AdminStore',{
       .then((respond)=>{
         this.categories = respond.data.categories;
         this.variants = respond.data.variants;
-        console.log('respond is ', this.categories, ' : ',this.variants);
       })
       .catch((err)=>{
         console.log('Fetch Categories Error : ', err);
@@ -33,17 +65,13 @@ const AdminStore = defineStore('AdminStore',{
     },
 
     async createProduct(data) {
-      console.log('data -> ',data)
-      return 'OK';
-      // await API.post('/admin/createproduct', data)
-      // .then((respond)=>{
-      //   console.log('create product respond : ', respond.data);
-      //   this.creating_product = respond.data
-      // })
+      await API.post('/admin/createproduct', data)
+      .then((respond)=>{
+        this.creating_product = respond.data
+      })
       // .catch((err)=>{
       //   console.log('Create product Error : ', err);
       // })
-
     },
 
     // Create Category
@@ -53,7 +81,6 @@ const AdminStore = defineStore('AdminStore',{
       }
       await API.post('/admin/createcategory', sending_data)
       .then((respond)=>{
-        console.log('respond is ', respond.data);
       })
       .catch((err)=>{
         console.log('Create Categories Error : ', err);
